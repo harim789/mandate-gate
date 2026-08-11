@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#ffffff; color:#171717; font-family:"Pretendard Variable", Pretendard, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0d74ce; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  @media (max-width:767px) { [data-nav-crumb] { display:none !important; } }
+  [data-nav-menu]::-webkit-scrollbar { display:none; }
+  *:focus:not(:focus-visible) { outline:none !important; }
+</style>
+</helmet>
+<div data-screen-label="랜딩" style="min-height:100vh; background:#ffffff;">
+
+  <nav style="height:64px; border-bottom:1px solid #dcdee0; display:flex; align-items:center;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; display:flex; align-items:center; gap:24px;">
+      <a href="Mandate Gate - 랜딩.dc.html" aria-current="page" style="flex:none; font-size:16px; font-weight:600; letter-spacing:-0.2px; color:#171717; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">Mandate Gate</a>
+      <div data-nav-menu style="margin-left:auto; min-width:0; display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none; padding:4px 0;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터</a>
+        <a href="Mandate Gate - 요청 원장.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록</a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">승인 대기 <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#ab6400;">2</span></a>
+        <a href="Mandate Gate - 위임장 목록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장</a>
+        <a href="Mandate Gate - 감사 기록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">감사 기록</a>
+      </div>
+    </div>
+  </nav>
+
+  <section style="width:min(1120px, 100% - 48px); margin:0 auto; padding:clamp(56px, 9vw, 96px) 0;">
+    <div style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">에이전트 금융 권한 게이트웨이</div>
+    <h1 style="margin:20px 0 0; max-width:880px; font-size:clamp(30px, 4.5vw, 56px); font-weight:600; line-height:1.15; letter-spacing:-1.4px; color:#171717; text-wrap:pretty;">AI가 대신 결제하는 시대는 이미 시작됐는데,<br>그 AI가 옳게 행동하는지 검사하는 계층은 아직 없습니다.</h1>
+    <p style="margin:24px 0 0; max-width:680px; font-size:18px; line-height:1.6; color:#60646c; text-wrap:pretty;">기존 금융 보안은 <span style="color:#171717; font-weight:600;">누가 하는가</span>를 검증합니다. 에이전트 시대에는 <span style="color:#171717; font-weight:600;">무엇을 위임받았는가</span>를 검증해야 합니다. 인증은 통과했지만 위임받지 않은 행동 — 이 영역이 지금 비어 있습니다.</p>
+    <div style="margin-top:32px; display:flex; align-items:center; gap:24px; flex-wrap:wrap;">
+      <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="display:inline-flex; align-items:center; height:44px; padding:0 24px; background:#000000; border-radius:8px; font-size:14px; font-weight:600; color:#ffffff;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04); text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">공격 시뮬레이터 실행</a>
+      <a href="Mandate Gate - req_4821.dc.html" style="font-size:14px; font-weight:600; color:#171717; border-radius:4px;" style-hover="text-decoration:underline; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록 보기 →</a>
+    </div>
+  </section>
+
+  <section style="background:#171717; padding:80px 0;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto;">
+      <sc-if value="{{ horizontal }}" hint-placeholder-val="{{ true }}">
+        <div style="position:relative;">
+          <div style="position:absolute; left:10%; right:10%; top:13px; height:1px; background:rgba(176,180,186,0.3);"></div>
+          <div style="position:absolute; top:10px; width:6px; height:6px; background:{{ dotColor }}; left:{{ dotLeft }}; transition:left 0.5s ease, background 0.3s ease;"></div>
+          <div style="display:grid; grid-template-columns:repeat(5, 1fr);">
+            <div style="text-align:center;"><span style="display:inline-block; background:#171717; padding:2px 10px; font-size:14px; color:#b0b4ba;">에이전트 요청</span></div>
+            <sc-for list="{{ stops }}" as="st" hint-placeholder-count="4">
+              <div style="text-align:center; opacity:{{ st.opacity }}; transition:opacity 0.3s ease;">
+                <span style="display:inline-block; background:#171717; padding:2px 10px; font-size:14px; color:#ffffff;">{{ st.no }} {{ st.name }}</span>
+                <div style="margin-top:12px; font-size:13px; min-height:20px; color:{{ st.markColor }};">{{ st.mark }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ vertical }}" hint-placeholder-val="{{ false }}">
+        <div style="position:relative; padding-left:24px;">
+          <div style="position:absolute; left:2px; top:12px; bottom:12px; width:1px; background:rgba(176,180,186,0.3);"></div>
+          <div style="position:absolute; left:0; top:{{ dotTop }}; width:6px; height:6px; background:{{ dotColor }}; transition:top 0.5s ease, background 0.3s ease;"></div>
+          <div style="display:flex; flex-direction:column; gap:28px;">
+            <div style="font-size:14px; line-height:1.5; color:#b0b4ba;">에이전트 요청</div>
+            <sc-for list="{{ stops }}" as="st" hint-placeholder-count="4">
+              <div style="display:flex; align-items:baseline; gap:12px; opacity:{{ st.opacity }}; transition:opacity 0.3s ease;">
+                <span style="font-size:14px; line-height:1.5; color:#ffffff;">{{ st.no }} {{ st.name }}</span>
+                <span style="font-size:13px; color:{{ st.markColor }};">{{ st.mark }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <p style="margin:40px 0 0; font-size:16px; line-height:1.5; color:#ffffff; text-wrap:pretty; opacity:{{ resultOpacity }}; transition:opacity 0.4s ease;">외부 웹페이지에서 온 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">490,000원</span> 결제 요청이 3번째 층에서 멈췄습니다</p>
+    </div>
+  </section>
+
+  <div style="border-top:1px solid #dcdee0; border-bottom:1px solid #dcdee0; height:56px; display:flex; align-items:center; justify-content:center; padding:0 24px;">
+    <span style="font-size:13px; color:#60646c; text-align:center;"><span style="white-space:nowrap;">오늘 차단 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">3</span>건</span> · <span style="white-space:nowrap;">승인 요청 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">1</span>건</span> · <span style="white-space:nowrap;">통과 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">27</span>건</span></span>
+  </div>
+
+  <section style="width:min(1120px, 100% - 48px); margin:0 auto; padding:clamp(56px, 9vw, 96px) 0;">
+    <h2 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">네 개의 층</h2>
+    <div style="margin-top:32px; border-top:1px solid #f0f0f3;">
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; padding:20px 0; border-bottom:1px solid #f0f0f3;">
+        <span style="flex:none; width:28px; font-family:'JetBrains Mono',monospace; font-size:14px; color:#999999;">①</span>
+        <div style="flex:1 1 320px; min-width:0;">
+          <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">권한 범위</div>
+          <div style="margin-top:2px; font-size:16px; line-height:1.5; color:#60646c;">이 에이전트가 결제·송금을 위임받았는가</div>
+        </div>
+        <span style="margin-left:auto; flex:none; white-space:nowrap; padding:3px 10px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c;">결정론적</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; padding:20px 0; border-bottom:1px solid #f0f0f3;">
+        <span style="flex:none; width:28px; font-family:'JetBrains Mono',monospace; font-size:14px; color:#999999;">②</span>
+        <div style="flex:1 1 320px; min-width:0;">
+          <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">정책 한도</div>
+          <div style="margin-top:2px; font-size:16px; line-height:1.5; color:#60646c;">금액·카테고리·시간대가 범위 안인가</div>
+        </div>
+        <span style="margin-left:auto; flex:none; white-space:nowrap; padding:3px 10px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c;">결정론적</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; padding:20px 0; border-bottom:1px solid #f0f0f3;">
+        <span style="flex:none; width:28px; font-family:'JetBrains Mono',monospace; font-size:14px; color:#999999;">③</span>
+        <div style="flex:1 1 320px; min-width:0;">
+          <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">출처 검증</div>
+          <div style="margin-top:2px; font-size:16px; line-height:1.5; color:#60646c;">이 금액과 계좌번호가 어디서 왔는가</div>
+        </div>
+        <span style="margin-left:auto; flex:none; white-space:nowrap; padding:3px 10px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c;">확률적</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap; padding:20px 0; border-bottom:1px solid #f0f0f3;">
+        <span style="flex:none; width:28px; font-family:'JetBrains Mono',monospace; font-size:14px; color:#999999;">④</span>
+        <div style="flex:1 1 320px; min-width:0;">
+          <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">의도 대조</div>
+          <div style="margin-top:2px; font-size:16px; line-height:1.5; color:#60646c;">사용자가 실제로 말한 것과 일치하는가</div>
+        </div>
+        <span style="margin-left:auto; flex:none; white-space:nowrap; padding:3px 10px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c;">확률적</span>
+      </div>
+    </div>
+    <p style="margin:16px 0 0; font-size:13px; line-height:1.4; color:#999999;">결정론적 규칙 검사가 먼저 통과해야 확률적 판단이 실행됩니다.</p>
+  </section>
+
+  <section style="border-top:1px solid #dcdee0;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:clamp(56px, 9vw, 96px) 0;">
+      <h2 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">출처를 등급으로 관리합니다</h2>
+      <p style="margin:20px 0 0; max-width:640px; font-size:18px; line-height:1.6; color:#999999; text-wrap:pretty;">대부분의 방어는 "이 요청이 수상한가"를 묻습니다.<br><span style="color:#171717;">Mandate Gate는 "이 값이 어디서 나왔는가"를 묻습니다.</span></p>
+      <div style="margin-top:32px; border-top:1px solid #f0f0f3; max-width:720px;">
+        <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:16px 0 16px 16px; border-bottom:1px solid #f0f0f3;">
+          <span style="flex:none; width:32px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#60646c;">L0</span>
+          <span style="flex:none; width:140px; font-size:16px; font-weight:600; color:#171717;">사용자 발화</span>
+          <span style="flex:1 1 200px; font-size:16px; line-height:1.5; color:#60646c;">사용자가 직접 말한 값</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:16px 0 16px 16px; border-bottom:1px solid #f0f0f3;">
+          <span style="flex:none; width:32px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#60646c;">L1</span>
+          <span style="flex:none; width:140px; font-size:16px; font-weight:600; color:#171717;">등록 데이터</span>
+          <span style="flex:1 1 200px; font-size:16px; line-height:1.5; color:#60646c;">위임장에 미리 등록된 값</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:16px 0 16px 16px; border-bottom:1px solid #f0f0f3;">
+          <span style="flex:none; width:32px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#60646c;">L2</span>
+          <span style="flex:none; width:140px; font-size:16px; font-weight:600; color:#171717;">가맹점 API</span>
+          <span style="flex:1 1 200px; font-size:16px; line-height:1.5; color:#60646c;">검증된 가맹점이 제시한 값</span>
+        </div>
+        <div style="display:flex; align-items:baseline; gap:16px; flex-wrap:wrap; padding:16px 0 16px 14px; border-left:2px solid #b42318; border-bottom:1px solid #f0f0f3;">
+          <span style="flex:none; width:32px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#b42318;">L3</span>
+          <span style="flex:none; width:140px; font-size:16px; font-weight:600; color:#b42318;">외부 웹·문서·메일</span>
+          <span style="flex:1 1 200px; font-size:16px; line-height:1.5; color:#b42318;">신뢰할 수 없는 외부 텍스트</span>
+        </div>
+      </div>
+      <p style="margin:20px 0 0; font-size:16px; line-height:1.5; color:#60646c;">결제 금액은 <span style="font-family:'JetBrains Mono',monospace; font-size:14px; color:#171717;">L2</span> 이상을 요구합니다. <span style="font-family:'JetBrains Mono',monospace; font-size:14px; color:#171717;">L3</span>에서만 발견된 값은 통과하지 못합니다.</p>
+    </div>
+  </section>
+
+  <section style="border-top:1px solid #dcdee0;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:clamp(56px, 9vw, 96px) 0;">
+      <h2 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">직접 확인해 보세요</h2>
+      <div style="margin-top:32px;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="display:flex; align-items:baseline; gap:16px 24px; flex-wrap:wrap; padding:20px 16px; margin:0 -16px; border-bottom:1px solid #f0f0f3; color:inherit; text-decoration:none;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+          <span style="flex:none; width:140px; font-size:18px; font-weight:600; line-height:1.4; color:#171717;">공격 시뮬레이터</span>
+          <span style="flex:1 1 260px; font-size:14px; line-height:1.5; color:#60646c; text-wrap:pretty;">숨겨진 텍스트로 490,000원을 빼내려는 시도를 직접 실행</span>
+          <span aria-hidden="true" style="flex:none; margin-left:auto; font-size:14px; color:#999999;">→</span>
+        </a>
+        <a href="Mandate Gate - req_4821.dc.html" style="display:flex; align-items:baseline; gap:16px 24px; flex-wrap:wrap; padding:20px 16px; margin:0 -16px; border-bottom:1px solid #f0f0f3; color:inherit; text-decoration:none;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+          <span style="flex:none; width:140px; font-size:18px; font-weight:600; line-height:1.4; color:#171717;">판정 상세</span>
+          <span style="flex:1 1 260px; font-size:14px; line-height:1.5; color:#60646c; text-wrap:pretty;">네 개 층 중 어디서 멈췄는지, 그 값이 어디서 왔는지</span>
+          <span aria-hidden="true" style="flex:none; margin-left:auto; font-size:14px; color:#999999;">→</span>
+        </a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="display:flex; align-items:baseline; gap:16px 24px; flex-wrap:wrap; padding:20px 16px; margin:0 -16px; border-bottom:1px solid #f0f0f3; color:inherit; text-decoration:none;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+          <span style="flex:none; width:140px; font-size:18px; font-weight:600; line-height:1.4; color:#171717;">승인 대기</span>
+          <span style="flex:1 1 260px; font-size:14px; line-height:1.5; color:#60646c; text-wrap:pretty;">게이트웨이가 판단을 보류하고 사람에게 넘긴 요청</span>
+          <span aria-hidden="true" style="flex:none; margin-left:auto; font-size:14px; color:#999999;">→</span>
+        </a>
+        <a href="Mandate Gate - 감사 기록.dc.html" style="display:flex; align-items:baseline; gap:16px 24px; flex-wrap:wrap; padding:20px 16px; margin:0 -16px; border-bottom:1px solid #f0f0f3; color:inherit; text-decoration:none;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+          <span style="flex:none; width:140px; font-size:18px; font-weight:600; line-height:1.4; color:#171717;">감사 기록</span>
+          <span style="flex:1 1 260px; font-size:14px; line-height:1.5; color:#60646c; text-wrap:pretty;">해시로 이어진 판정 기록과 변조 시나리오 시연</span>
+          <span aria-hidden="true" style="flex:none; margin-left:auto; font-size:14px; color:#999999;">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#fafafa; border-top:1px solid #dcdee0;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:64px 0; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+      <p style="margin:0; font-size:28px; font-weight:600; line-height:1.2; letter-spacing:-0.7px; color:#171717; text-wrap:pretty; max-width:640px;">심사위원께 — 시뮬레이터에서 직접 공격을 실행해 보실 수 있습니다</p>
+      <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="display:inline-flex; align-items:center; height:44px; padding:0 24px; background:#000000; border-radius:8px; font-size:14px; font-weight:600; color:#ffffff; flex:none;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04); text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">공격 시뮬레이터 실행</a>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid #dcdee0;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; height:64px; display:flex; align-items:center; justify-content:space-between; gap:16px;">
+      <span style="font-size:13px; color:#999999;">2026 금융 AI Challenge · 금융보안원 / 데이콘</span>
+      <div style="display:flex; gap:20px;">
+        <a href="Mandate Gate - req_4821.dc.html" style="font-size:13px; color:#60646c; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">문서</a>
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="font-size:13px; color:#60646c; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">깃허브</a>
+      </div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;animatePipeline&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;동작&quot; },
+  &quot;loopSeconds&quot;: { &quot;editor&quot;: &quot;range&quot;, &quot;default&quot;: 6, &quot;min&quot;: 4, &quot;max&quot;: 12, &quot;step&quot;: 1, &quot;unit&quot;: &quot;s&quot;, &quot;tsType&quot;: &quot;number&quot;, &quot;section&quot;: &quot;동작&quot; }
+}">
+const PIPE = [
+  { no: "①", name: "권한 범위", kind: "pass" },
+  { no: "②", name: "정책 한도", kind: "pass" },
+  { no: "③", name: "출처 검증", kind: "halt" },
+  { no: "④", name: "의도 대조", kind: "skip" },
+];
+const DOT_X = ["calc(20% - 3px)", "calc(40% - 3px)", "calc(60% - 3px)", "calc(70% - 52px)", "calc(70% - 52px)"];
+
+class Component extends DCLogic {
+  state = { phase: 4, vertical: false };
+  componentDidMount() {
+    this._onR = () => {
+      const v = window.innerWidth < 768;
+      if (v !== this.state.vertical) this.setState({ vertical: v });
+    };
+    window.addEventListener("resize", this._onR);
+    this._onR();
+    const reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduced || this.props.animatePipeline === false) { this.setState({ phase: 4 }); return; }
+    const cycle = () => {
+      (this._ts || []).forEach(clearTimeout);
+      this.setState({ phase: 0 });
+      this._ts = [700, 1400, 2100, 2600].map((t, i) => setTimeout(() => this.setState({ phase: i + 1 }), t));
+    };
+    cycle();
+    this._loop = setInterval(cycle, (this.props.loopSeconds ?? 6) * 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this._loop);
+    (this._ts || []).forEach(clearTimeout);
+    window.removeEventListener("resize", this._onR);
+  }
+  renderVals() {
+    const { phase, vertical } = this.state;
+    const stops = PIPE.map((st, i) => {
+      if (st.kind === "pass") return { no: st.no, name: st.name, opacity: 1, mark: phase >= i + 1 ? "✓" : "", markColor: "#b0b4ba" };
+      if (st.kind === "halt") return { no: st.no, name: st.name, opacity: 1, mark: phase >= 3 ? "멈춤" : "", markColor: "#b42318" };
+      return { no: st.no, name: st.name, opacity: phase >= 3 ? 0.35 : 1, mark: phase >= 3 ? "미실행" : "", markColor: "#b0b4ba" };
+    });
+    const idx = [0, 1, 2, 3, 3][phase];
+    return {
+      stops,
+      horizontal: !vertical,
+      vertical,
+      dotLeft: DOT_X[phase],
+      dotTop: (6 + idx * 49) + "px",
+      dotColor: phase >= 3 ? "#b42318" : "#ffffff",
+      resultOpacity: phase >= 4 ? 1 : 0,
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#ffffff; color:#171717; font-family:"Pretendard Variable", Pretendard, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0d74ce; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  @media (max-width:767px) { [data-nav-crumb] { display:none !important; } }
+  [data-nav-menu]::-webkit-scrollbar { display:none; }
+  *:focus:not(:focus-visible) { outline:none !important; }
+  button:disabled { cursor:default; opacity:0.5; }
+</style>
+</helmet>
+<div data-screen-label="감사 기록" style="min-height:100vh; background:#ffffff;">
+
+  <nav style="height:64px; border-bottom:1px solid #dcdee0; display:flex; align-items:center;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; display:flex; align-items:center; gap:24px;">
+      <a href="Mandate Gate - 랜딩.dc.html" style="flex:none; font-size:16px; font-weight:600; letter-spacing:-0.2px; color:#171717; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">Mandate Gate</a>
+      <span data-nav-crumb style="flex:none; font-size:14px; color:#60646c; white-space:nowrap;">감사 기록</span>
+      <div data-nav-menu style="margin-left:auto; min-width:0; display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none; padding:4px 0;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터</a>
+        <a href="Mandate Gate - 요청 원장.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록</a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">승인 대기 <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#ab6400;">2</span></a>
+        <a href="Mandate Gate - 위임장 목록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장</a>
+        <a href="Mandate Gate - 감사 기록.dc.html" aria-current="page" style="flex:none; font-size:14px; font-weight:600; color:#171717; white-space:nowrap; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">감사 기록</a>
+        <span style="flex:none; font-size:13px; color:#999999; white-space:nowrap;">김민수 님</span>
+      </div>
+    </div>
+  </nav>
+
+  <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:48px 0;">
+    <h1 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">감사 기록</h1>
+    <p style="margin:12px 0 0; max-width:560px; font-size:16px; line-height:1.5; color:#60646c; text-wrap:pretty;">모든 판정은 직전 기록의 해시를 포함해 이어집니다. 한 건이라도 바뀌면 이후 사슬 전체가 어긋납니다.</p>
+
+    <div style="margin-top:32px; background:#171717; border-radius:12px; padding:24px;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#b0b4ba;">체인 상태</div>
+      <div style="margin-top:8px; font-size:14px; line-height:1.5; color:#ffffff;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">4,821</span>건 · <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">2026-06-01 09:12:04</span> ~ <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">2026-08-07 14:33:12</span></div>
+      <div style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.08); padding-top:20px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <div style="flex:1 1 260px; min-width:0;">
+          <sc-if value="{{ resultBroken }}" hint-placeholder-val="{{ false }}">
+            <div>
+              <span style="font-size:14px; font-weight:600; color:#b42318;">✕ 사슬이 끊어졌습니다 · <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">#4823</span>에서 단절 · 이후 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">2</span>건 검증 실패</span>
+              <div style="margin-top:8px; font-size:13px; line-height:1.4; color:#999999; text-wrap:pretty;">오래된 기록을 고칠수록 다시 계산해야 하는 양이 늘어납니다. 6월 1일 기록을 고치면 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">4,820</span>건을 전부 다시 계산해야 합니다.</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ resultRunning }}" hint-placeholder-val="{{ false }}">
+            <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#b0b4ba;">검증 중 · {{ verifyCount }} / 4821</span>
+          </sc-if>
+          <sc-if value="{{ resultDone }}" hint-placeholder-val="{{ false }}">
+            <span style="font-size:14px; font-weight:600; color:#16a34a;">✓ <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">4,821</span>건 전부 검증했습니다 · 위변조 흔적 없음</span>
+          </sc-if>
+          <sc-if value="{{ resultIdle }}" hint-placeholder-val="{{ true }}">
+            <span style="font-size:14px; font-weight:600; color:#16a34a;">✓ 위변조 흔적 없음</span>
+          </sc-if>
+        </div>
+        <sc-if value="{{ resultDone }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:13px; color:#b0b4ba;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">2026-08-07 14:35:02</span> 검증</span>
+        </sc-if>
+        <button onClick="{{ runVerify }}" disabled="{{ verifying }}" style="flex:none; height:44px; padding:0 20px; background:#ffffff; border:1px solid #ffffff; border-radius:8px; font-family:inherit; font-size:14px; font-weight:600; color:#171717; cursor:pointer; white-space:nowrap;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04);" style-focus="outline:2px solid #ffffff; outline-offset:2px;">무결성 검증</button>
+      </div>
+    </div>
+
+    <div style="margin-top:16px; display:flex; justify-content:flex-end;">
+      <button role="switch" aria-checked="{{ tamperChecked }}" onClick="{{ toggleTamper }}" style="display:flex; align-items:center; gap:10px; background:none; border:none; padding:4px; margin:-4px; cursor:pointer; font-family:inherit; border-radius:4px;" style-focus="outline:2px solid #171717; outline-offset:2px;">
+        <span style="display:inline-flex; width:36px; height:20px; flex:none; border-radius:9999px; background:{{ trackBg }}; padding:2px; transition:background 0.2s ease;">
+          <span style="width:16px; height:16px; border-radius:9999px; background:#ffffff; box-shadow:0 1px 2px rgba(0,0,0,0.2); transform:{{ knobX }}; transition:transform 0.2s ease;"></span>
+        </span>
+        <span style="font-size:13px; color:#60646c;">변조 시나리오 시연</span>
+      </button>
+    </div>
+
+    <div style="margin-top:24px; border-top:1px solid #dcdee0; padding-top:24px;">
+      <sc-for list="{{ items }}" as="it" hint-placeholder-count="8">
+        <div onMouseEnter="{{ it.enter }}" onMouseLeave="{{ it.leave }}" style="display:flex;">
+          <div style="flex:none; width:24px; position:relative;">
+            <div style="position:absolute; left:9px; top:0; height:12px; width:0; border-left:1px {{ it.upperLine }}; transition:border-color 0.2s ease;"></div>
+            <div style="position:absolute; left:9px; top:19px; bottom:0; width:0; border-left:1px {{ it.lowerLine }}; transition:border-color 0.2s ease;"></div>
+            <div style="position:absolute; left:7px; top:12px; width:5px; height:5px; background:#171717;"></div>
+          </div>
+          <div style="flex:1; min-width:0; padding-bottom:24px;">
+            <div style="display:flex; align-items:baseline; gap:8px 14px; flex-wrap:wrap;">
+              <sc-if value="{{ it.isBlock }}" hint-placeholder-val="{{ false }}">
+                <span aria-hidden="true" style="flex:none; width:2px; height:13px; background:#b42318; align-self:center;"></span>
+              </sc-if>
+              <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; font-weight:500; color:#171717;">#{{ it.id }}</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:13px; color:#60646c;">{{ it.at }}</span>
+              <span style="font-size:14px; font-weight:600; color:{{ it.verdictColor }}; white-space:nowrap;">{{ it.verdict }}</span>
+              <span style="flex:{{ it.summaryFlex }}; min-width:0; font-size:14px; line-height:1.5; color:#60646c; word-break:keep-all;">{{ it.summary }}</span>
+            </div>
+            <sc-if value="{{ it.showTamperNote }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:4px; font-size:13px; line-height:1.4; color:#b42318;">금액 50,000원 → 500,000원 변조됨</div>
+            </sc-if>
+            <div style="margin-top:8px; display:flex; flex-direction:column; gap:2px; align-items:flex-start;">
+              <button onClick="{{ it.toggleHash }}" style="display:flex; align-items:baseline; gap:10px; max-width:100%; background:{{ it.prevBg }}; border:none; border-radius:4px; padding:2px 6px; margin-left:-6px; font-family:inherit; text-align:left; cursor:{{ it.hashCursor }}; transition:background 0.2s ease;" style-focus="outline:2px solid #171717; outline-offset:1px;">
+                <span style="flex:none; width:32px; font-size:11px; font-weight:600; letter-spacing:0.06em; color:{{ it.prevLabelColor }};">prev</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; line-height:1.4; overflow-wrap:{{ it.hashWrap }};"><span style="color:{{ it.prevDim }};">sha256:</span><span style="font-weight:500; color:{{ it.prevHiColor }};">{{ it.prevHi }}</span><span style="color:{{ it.prevDim }};">{{ it.prevRest }}</span></span>
+              </button>
+              <button onClick="{{ it.toggleHash }}" style="display:flex; align-items:baseline; gap:10px; max-width:100%; background:{{ it.selfBg }}; border:none; border-radius:4px; padding:2px 6px; margin-left:-6px; font-family:inherit; text-align:left; cursor:{{ it.hashCursor }}; transition:background 0.2s ease;" style-focus="outline:2px solid #171717; outline-offset:1px;">
+                <span style="flex:none; width:32px; font-size:11px; font-weight:600; letter-spacing:0.06em; color:{{ it.selfLabelColor }};">self</span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:11px; line-height:1.4; overflow-wrap:{{ it.hashWrap }};"><span style="color:{{ it.selfDim }};">sha256:</span><span style="font-weight:500; color:{{ it.selfHiColor }};">{{ it.selfHi }}</span><span style="color:{{ it.selfDim }};">{{ it.selfRest }}</span></span>
+              </button>
+            </div>
+            <sc-if value="{{ it.showBreakNote }}" hint-placeholder-val="{{ false }}">
+              <div style="margin-top:8px; font-size:13px; line-height:1.4; color:#999999; text-wrap:pretty;"><span style="font-family:'JetBrains Mono',monospace;">#4823</span>을 고치면 그 이후 모든 해시를 다시 계산해야 합니다. 사슬은 그것을 어렵게 만듭니다.</div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="border-top:1px solid #dcdee0; padding-top:20px; text-align:center;">
+        <button onClick="{{ showMore }}" style="background:none; border:none; padding:0; font-family:inherit; font-size:14px; font-weight:600; color:#171717; cursor:pointer; border-radius:4px;" style-hover="text-decoration:underline;" style-focus="outline:2px solid #171717; outline-offset:2px;">로그 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">4,817</span>건 더 보기 ↓</button>
+        <sc-if value="{{ moreNote }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:8px; font-size:13px; line-height:1.4; color:#999999;">데모에서는 최근 8건만 표시합니다.</div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;tamperDefault&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;동작&quot; }
+}">
+const LOGS = [
+  { id: 4827, at: "14:33:12", verdict: "차단", summary: "송금 1,200,000원 · 권한 없음", prev: "2c47b1e90d33a8f5c614e7b209d84f31", self: "5e91d38a7c40b2f6e83a15d9c07b4e28" },
+  { id: 4825, at: "14:19:47", verdict: "통과", summary: "결제 8,900원 · 카페", prev: "9f3a7c21e8b4d05f6a13c9e7f2b8d4a0", self: "2c47b1e90d33a8f5c614e7b209d84f31" },
+  { id: 4823, at: "14:11:02", verdict: "승인 필요", summary: "송금 50,000원 · 박OO", prev: "b8e04f1362da97c5e01b8f43d7a52c96", self: "9f3a7c21e8b4d05f6a13c9e7f2b8d4a0", tamperedSelf: "cc10be7495a3f81d20e6b7c84f39a05d" },
+  { id: 4821, at: "14:07:55", verdict: "차단", summary: "결제 490,000원 · 미확인 가맹점", prev: "41ca7d9083eb15f2a76c0d48e51b9c37", self: "b8e04f1362da97c5e01b8f43d7a52c96" },
+  { id: 4819, at: "14:04:10", verdict: "통과", summary: "결제 3,200원 · 편의점", prev: "7d25a0c9be48f316802df5a1c93e6b74", self: "41ca7d9083eb15f2a76c0d48e51b9c37" },
+  { id: 4818, at: "14:02:31", verdict: "통과", summary: "결제 12,800원 · 김밥천국", prev: "0a63e8d17f92b45c3e80a7d216fc5b98", self: "7d25a0c9be48f316802df5a1c93e6b74" },
+  { id: 4815, at: "13:51:08", verdict: "통과", summary: "결제 15,400원 · 마트", prev: "e572c14b806af39d15c7b0e284a6f13c", self: "0a63e8d17f92b45c3e80a7d216fc5b98" },
+  { id: 4812, at: "13:40:22", verdict: "통과", summary: "송금 30,000원 · 이OO", prev: "39b8f0a6c25e74d1b930fa587c246e0b", self: "e572c14b806af39d15c7b0e284a6f13c" },
+];
+// 연쇄 검증: LOGS[i].prev === LOGS[i+1].self (전 구간 일치 확인 완료)
+const VERDICT_COLOR = { "통과": "#16a34a", "승인 필요": "#ab6400", "차단": "#b42318" };
+const SOLID = "solid #dcdee0", BROKEN = "dashed #b42318";
+
+class Component extends DCLogic {
+  state = { tampered: false, hovered: null, verifyState: "idle", verifyCount: 0, hashOpen: {}, moreNote: false, width: 1280 };
+  componentDidMount() {
+    if (this.props.tamperDefault) this.setState({ tampered: true });
+    this._reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this._onR = () => { if (window.innerWidth !== this.state.width) this.setState({ width: window.innerWidth }); };
+    window.addEventListener("resize", this._onR);
+    this._onR();
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onR); clearInterval(this._v); }
+  runVerify() {
+    if (this.state.verifyState === "running") return;
+    if (this._reduced) { this.setState({ verifyState: "done", verifyCount: 4821 }); return; }
+    this.setState({ verifyState: "running", verifyCount: 0 });
+    let n = 0;
+    this._v = setInterval(() => {
+      n += 483;
+      if (n >= 4821) { clearInterval(this._v); this.setState({ verifyState: "done", verifyCount: 4821 }); }
+      else this.setState({ verifyCount: n });
+    }, 20);
+  }
+  renderVals() {
+    const s = this.state;
+    const mid = s.width < 1024;
+    const narrow = s.width < 768;
+    const T = s.tampered;
+    const items = LOGS.map((l, i) => {
+      const isTampered = T && l.id === 4823;
+      const selfHex = isTampered ? l.tamperedSelf : l.self;
+      const prevBrokenRow = T && l.id === 4825;
+      const selfBrokenRow = isTampered;
+      const open = !!s.hashOpen[l.id];
+      const cut = mid && !open;
+      const seg = hex => ({ hi: hex.slice(0, 8), rest: cut ? hex.slice(8, 16) + "…" : hex.slice(8) });
+      const p = seg(l.prev), sf = seg(selfHex);
+      const hl = k => k ? "#f0f0f3" : "transparent";
+      return {
+        id: l.id, at: l.at, verdict: l.verdict,
+        verdictColor: VERDICT_COLOR[l.verdict],
+        isBlock: l.verdict === "차단",
+        summary: l.summary,
+        summaryFlex: narrow ? "1 1 100%" : "0 1 auto",
+        upperLine: (T && l.id === 4823) ? BROKEN : SOLID,
+        lowerLine: (T && l.id === 4825) ? BROKEN : SOLID,
+        showTamperNote: isTampered,
+        showBreakNote: isTampered,
+        prevHi: p.hi, prevRest: p.rest,
+        selfHi: sf.hi, selfRest: sf.rest,
+        prevLabelColor: prevBrokenRow ? "#b42318" : "#999999",
+        selfLabelColor: selfBrokenRow ? "#b42318" : "#999999",
+        prevHiColor: prevBrokenRow ? "#b42318" : "#171717",
+        selfHiColor: selfBrokenRow ? "#b42318" : "#171717",
+        prevDim: prevBrokenRow ? "#b42318" : "#999999",
+        selfDim: selfBrokenRow ? "#b42318" : "#999999",
+        prevBg: hl(s.hovered === i + 1),
+        selfBg: hl(s.hovered === i),
+        hashCursor: mid ? "pointer" : "default",
+        hashWrap: cut ? "normal" : "anywhere",
+        toggleHash: () => { if (mid) this.setState(p2 => ({ hashOpen: Object.assign({}, p2.hashOpen, { [l.id]: !p2.hashOpen[l.id] }) })); },
+        enter: () => this.setState({ hovered: i }),
+        leave: () => this.setState({ hovered: null }),
+      };
+    });
+    return {
+      items,
+      resultBroken: T,
+      resultRunning: !T && s.verifyState === "running",
+      resultDone: !T && s.verifyState === "done",
+      resultIdle: !T && s.verifyState === "idle",
+      verifyCount: s.verifyCount,
+      verifying: s.verifyState === "running",
+      runVerify: () => this.runVerify(),
+      tamperChecked: T ? "true" : "false",
+      trackBg: T ? "#171717" : "#dcdee0",
+      knobX: T ? "translateX(16px)" : "translateX(0)",
+      toggleTamper: () => this.setState({ tampered: !T }),
+      moreNote: s.moreNote,
+      showMore: () => this.setState({ moreNote: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>

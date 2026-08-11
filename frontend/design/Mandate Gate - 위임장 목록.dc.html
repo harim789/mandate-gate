@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#ffffff; color:#171717; font-family:"Pretendard Variable", Pretendard, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0d74ce; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  @media (max-width:767px) { [data-nav-crumb] { display:none !important; } }
+  [data-nav-menu]::-webkit-scrollbar { display:none; }
+  *:focus:not(:focus-visible) { outline:none !important; }
+  [data-row] [data-detail] { opacity:0; }
+  [data-row]:hover [data-detail], [data-row]:focus [data-detail] { opacity:1; }
+  [data-hrow="on"]:hover { background:#fafafa; }
+</style>
+</helmet>
+<div data-screen-label="위임장 목록·상세" style="min-height:100vh; background:#ffffff;">
+
+  <nav style="height:64px; border-bottom:1px solid #dcdee0; display:flex; align-items:center;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; display:flex; align-items:center; gap:24px;">
+      <a href="Mandate Gate - 랜딩.dc.html" style="flex:none; font-size:16px; font-weight:600; letter-spacing:-0.2px; color:#171717; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">Mandate Gate</a>
+      <span data-nav-crumb style="flex:none; font-size:14px; color:#60646c; white-space:nowrap;">위임장</span>
+      <div data-nav-menu style="margin-left:auto; min-width:0; display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none; padding:4px 0;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터</a>
+        <a href="Mandate Gate - 요청 원장.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록</a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">승인 대기 <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#ab6400;">2</span></a>
+        <a href="Mandate Gate - 위임장 목록.dc.html" aria-current="page" style="flex:none; font-size:14px; font-weight:600; color:#171717; white-space:nowrap; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장</a>
+        <a href="Mandate Gate - 감사 기록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">감사 기록</a>
+        <span style="flex:none; font-size:13px; color:#999999; white-space:nowrap;">김민수 님</span>
+      </div>
+    </div>
+  </nav>
+
+  <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:48px 0;">
+
+    <sc-if value="{{ listView }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+          <div>
+            <h1 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">위임장</h1>
+            <p style="margin:12px 0 0; font-size:16px; line-height:1.5; color:#60646c;">에이전트가 할 수 있는 일의 범위를 정한 문서입니다.</p>
+          </div>
+          <a href="Mandate Gate - 위임장 발급.dc.html" style="display:inline-flex; align-items:center; height:44px; padding:0 24px; background:#000000; border-radius:8px; font-size:14px; font-weight:600; color:#ffffff; flex:none;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04); text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장 발급</a>
+        </div>
+
+        <div style="margin-top:32px;">
+          <sc-if value="{{ tableWide }}" hint-placeholder-val="{{ true }}">
+            <div style="display:grid; grid-template-columns:150px 110px minmax(0,1fr) 110px 90px 56px; gap:16px; padding:12px 0 12px 16px; border-bottom:1px solid #dcdee0; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">
+              <span>위임장 ID</span><span>수임인</span><span style="text-align:right;">사용 / 총 한도</span><span>송금</span><span>상태</span><span></span>
+            </div>
+          </sc-if>
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="3">
+            <div data-row data-hrow="{{ r.hrow }}" role="button" tabIndex="0" onClick="{{ r.open }}" onKeyDown="{{ r.key }}" style="cursor:pointer; opacity:{{ r.opacity }}; border-bottom:1px solid #f0f0f3;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+              <sc-if value="{{ tableWide }}" hint-placeholder-val="{{ true }}">
+                <div style="padding:14px 0 14px 16px;">
+                  <div style="display:grid; grid-template-columns:150px 110px minmax(0,1fr) 110px 90px 56px; gap:16px; align-items:baseline;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#171717;">{{ r.id }}</span>
+                    <span style="font-size:14px; color:#171717;">{{ r.agent }}</span>
+                    <span style="text-align:right; white-space:nowrap;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;">{{ r.used }}</span><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#999999;"> / {{ r.total }}</span></span>
+                    <span style="font-size:14px; font-weight:{{ r.transferWeight }}; color:{{ r.transferColor }}; white-space:nowrap;">{{ r.transfer }}</span>
+                    <span style="font-size:14px; font-weight:600; color:{{ r.statusColor }}; white-space:nowrap;">{{ r.statusGlyph }} {{ r.status }}</span>
+                    <span style="text-align:right;"><span data-detail style="font-size:13px; font-weight:600; color:#171717; white-space:nowrap;">상세 →</span></span>
+                  </div>
+                  <div style="margin-top:4px; font-size:13px; line-height:1.4; color:#999999;">{{ r.summary }}</div>
+                </div>
+              </sc-if>
+              <sc-if value="{{ tableNarrow }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:14px 0 14px 16px;">
+                  <div style="display:flex; align-items:baseline; gap:12px;">
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#171717;">{{ r.id }}</span>
+                    <span style="font-size:14px; color:#171717;">{{ r.agent }}</span>
+                    <span data-detail style="margin-left:auto; font-size:13px; font-weight:600; color:#171717; white-space:nowrap;">상세 →</span>
+                  </div>
+                  <div style="margin-top:6px; display:flex; align-items:baseline; gap:12px; flex-wrap:wrap;">
+                    <span style="white-space:nowrap;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;">{{ r.used }}</span><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#999999;"> / {{ r.total }}</span></span>
+                    <span style="font-size:14px; font-weight:{{ r.transferWeight }}; color:{{ r.transferColor }};">{{ r.transfer }}</span>
+                    <span style="font-size:14px; font-weight:600; color:{{ r.statusColor }};">{{ r.statusGlyph }} {{ r.status }}</span>
+                  </div>
+                  <div style="margin-top:4px; font-size:13px; line-height:1.4; color:#999999;">{{ r.summary }}</div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ detailView }}" hint-placeholder-val="{{ false }}">
+      <div>
+        <button onClick="{{ backToList }}" style="background:none; border:none; padding:0; font-family:inherit; font-size:14px; color:#60646c; cursor:pointer; border-radius:4px;" style-hover="color:#171717; text-decoration:underline;" style-focus="outline:2px solid #171717; outline-offset:2px;">← 위임장 목록</button>
+        <div style="margin-top:20px; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;">
+          <h1 style="margin:0; font-family:'JetBrains Mono',monospace; font-size:28px; font-weight:500; line-height:1.2; letter-spacing:-0.7px; color:#171717;">#{{ d.id }}</h1>
+          <span style="font-size:14px; font-weight:600; color:{{ d.statusColor }};">{{ d.statusGlyph }} {{ d.status }}</span>
+        </div>
+
+        <div style="margin-top:32px; display:grid; grid-template-columns:{{ detailCols }}; gap:24px; align-items:start;">
+
+          <div style="border:1px solid #dcdee0; border-radius:12px; overflow:hidden; opacity:{{ d.certOpacity }};">
+            <div style="height:2px; background:{{ d.topBar }};"></div>
+            <div style="padding:32px;">
+              <div style="font-size:18px; font-weight:600; letter-spacing:0.2em; color:#171717;">위임장</div>
+              <div style="margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#999999;">#{{ d.id }}</div>
+              <div style="margin-top:20px; border-top:1px solid #dcdee0;">
+                <sc-for list="{{ d.certRows }}" as="row" hint-placeholder-count="7">
+                  <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #f0f0f3;">
+                    <span style="flex:none; font-size:13px; color:#999999;">{{ row.label }}</span>
+                    <span style="text-align:right; font-size:14px; line-height:1.5; font-weight:{{ row.weight }}; color:{{ row.color }}; font-family:{{ row.font }}; font-variant-numeric:tabular-nums;">{{ row.value }}</span>
+                  </div>
+                </sc-for>
+                <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0 4px;">
+                  <span style="flex:none; font-size:13px; color:#999999;">상태</span>
+                  <span style="font-size:14px; font-weight:600; color:{{ d.certStatusColor }};">{{ d.certStatus }}</span>
+                </div>
+                <div style="padding:8px 0 0; text-align:right; font-family:'JetBrains Mono',monospace; font-size:13px; color:#999999;">서명 {{ d.signature }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:24px; min-width:0;">
+            <div style="border:1px solid #dcdee0; border-radius:12px; padding:32px;">
+              <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">사용 현황</div>
+              <div style="margin-top:16px; border-top:1px solid #dcdee0;">
+                <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #f0f0f3;">
+                  <span style="font-size:13px; color:#999999;">총 한도</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#60646c;">{{ d.totalStr }}</span>
+                </div>
+                <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #f0f0f3;">
+                  <span style="font-size:13px; color:#999999;">사용액</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#60646c;">{{ d.usedStr }}</span>
+                </div>
+                <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 0; border-bottom:1px solid #f0f0f3;">
+                  <span style="font-size:13px; color:#999999;">잔여</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; font-weight:600; color:#171717;">{{ d.remainStr }}</span>
+                </div>
+              </div>
+              <div style="margin-top:20px; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">판정 이력</div>
+              <div style="margin-top:8px; font-size:13px; line-height:1.4; color:#60646c;">통과 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">{{ d.hAllow }}</span> · 승인 필요 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">{{ d.hHold }}</span> · 차단 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; color:#171717;">{{ d.hBlock }}</span></div>
+              <a href="Mandate Gate - 요청 원장.dc.html" style="margin-top:16px; display:inline-flex; align-items:center; height:44px; padding:0 20px; background:#ffffff; border:1px solid #dcdee0; border-radius:8px; font-size:14px; font-weight:600; color:#171717;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04); text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">이 위임장의 요청 기록 →</a>
+            </div>
+
+            <sc-if value="{{ d.showRevokeCard }}" hint-placeholder-val="{{ false }}">
+              <div style="border:1px solid #b42318; border-radius:12px; padding:32px; background:#ffffff;">
+                <div style="font-size:18px; font-weight:600; line-height:1.4; color:#171717;">위임장 폐기</div>
+                <sc-if value="{{ d.notConfirming }}" hint-placeholder-val="{{ true }}">
+                  <div>
+                    <p style="margin:8px 0 0; font-size:14px; line-height:1.5; color:#60646c; text-wrap:pretty;">폐기하면 {{ d.agent }}는 즉시 아무 요청도 보낼 수 없습니다. 되돌릴 수 없습니다.</p>
+                    <button onClick="{{ startRevoke }}" style="margin-top:20px; height:44px; padding:0 20px; background:#ffffff; border:1px solid #b42318; border-radius:8px; font-family:inherit; font-size:14px; font-weight:600; color:#b42318; cursor:pointer;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04);" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장 폐기</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ d.confirming }}" hint-placeholder-val="{{ false }}">
+                  <div>
+                    <p style="margin:8px 0 0; font-size:14px; line-height:1.5; color:#171717;"><span style="font-family:'JetBrains Mono',monospace; font-size:13px;">#{{ d.id }}</span> 을 폐기합니다. 이 동작은 되돌릴 수 없습니다.</p>
+                    <div style="margin-top:20px; display:flex; align-items:center; gap:20px;">
+                      <button onClick="{{ confirmRevoke }}" style="height:44px; padding:0 20px; background:#b42318; border:1px solid #b42318; border-radius:8px; font-family:inherit; font-size:14px; font-weight:600; color:#ffffff; cursor:pointer;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04);" style-focus="outline:2px solid #171717; outline-offset:2px;">폐기</button>
+                      <button onClick="{{ cancelRevoke }}" style="background:none; border:none; padding:0; font-family:inherit; font-size:14px; color:#60646c; cursor:pointer; text-decoration:underline; border-radius:4px;" style-hover="color:#171717;" style-focus="outline:2px solid #171717; outline-offset:2px;">취소</button>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ d.showRevokedNote }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:13px; line-height:1.4; color:#999999;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">{{ d.revokedAt }}</span> 폐기됨</div>
+            </sc-if>
+          </div>
+
+        </div>
+      </div>
+    </sc-if>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;initialView&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;목록&quot;, &quot;상세&quot;], &quot;default&quot;: &quot;목록&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;동작&quot; }
+}">
+const MANDATES = [
+  { id: "M-2026-0041", agent: "쇼핑비서", status: "유효", maxPerTx: 30000, maxTotal: 200000, usedAmount: 42300, categories: ["식음료", "교통"], hourFrom: "07:00", hourTo: "22:00", allowTransfer: false, recipients: [], validFrom: "2026-08-07", validUntil: "2026-09-06", signature: "sig_8f3a9c21e4b7", history: { allow: 27, hold: 1, block: 5 } },
+  { id: "M-2026-0038", agent: "은행비서", status: "유효", maxPerTx: 100000, maxTotal: 500000, usedAmount: 80000, categories: ["생활용품"], hourFrom: "09:00", hourTo: "18:00", allowTransfer: true, recipients: ["박OO", "이OO"], validFrom: "2026-07-15", validUntil: "2026-08-31", signature: "sig_2c47b1e90d33", history: { allow: 14, hold: 2, block: 0 } },
+  { id: "M-2026-0022", agent: "쇼핑비서", status: "폐기됨", maxPerTx: 20000, maxTotal: 100000, usedAmount: 12000, categories: ["식음료"], hourFrom: "08:00", hourTo: "20:00", allowTransfer: false, recipients: [], validFrom: "2026-06-20", validUntil: "2026-07-20", signature: "sig_71d0a5f4c8b2", revokedAt: "2026-07-30", history: { allow: 9, hold: 0, block: 1 } },
+];
+const STATUS_META = {
+  "유효": { color: "#16a34a", glyph: "✓" },
+  "폐기됨": { color: "#999999", glyph: "" },
+  "만료됨": { color: "#999999", glyph: "" },
+};
+
+class Component extends DCLogic {
+  state = { view: "list", selectedId: null, confirming: false, revokedMap: {}, width: 1280 };
+  componentDidMount() {
+    if (this.props.initialView === "상세") this.setState({ view: "detail", selectedId: MANDATES[0].id });
+    this._onR = () => { if (window.innerWidth !== this.state.width) this.setState({ width: window.innerWidth }); };
+    window.addEventListener("resize", this._onR);
+    this._onR();
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onR); }
+  effective(m) {
+    const runtimeRevoked = this.state.revokedMap[m.id];
+    if (runtimeRevoked) return Object.assign({}, m, { status: "폐기됨", revokedAt: runtimeRevoked });
+    return m;
+  }
+  renderVals() {
+    const s = this.state;
+    const won = n => n.toLocaleString("ko-KR") + "원";
+    const num = n => n.toLocaleString("ko-KR");
+    const tableWide = s.width >= 768;
+    const rows = MANDATES.map(raw => {
+      const m = this.effective(raw);
+      const meta = STATUS_META[m.status];
+      const active = m.status === "유효";
+      const open = () => this.setState({ view: "detail", selectedId: m.id, confirming: false });
+      return {
+        id: "#" + m.id, agent: m.agent,
+        used: num(m.usedAmount), total: num(m.maxTotal),
+        transfer: m.allowTransfer ? "허용 " + m.recipients.length + "명" : "불허",
+        transferColor: m.allowTransfer ? "#ab6400" : "#60646c",
+        transferWeight: m.allowTransfer ? 600 : 400,
+        status: m.status, statusColor: meta.color, statusGlyph: meta.glyph,
+        opacity: active ? 1 : 0.55,
+        hrow: active ? "on" : "off",
+        summary: active
+          ? m.categories.join(" · ") + " · " + m.hourFrom + "–" + m.hourTo + " · ~" + m.validUntil.slice(5)
+          : "폐기 " + (m.revokedAt || ""),
+        open,
+        key: e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); } },
+      };
+    });
+    let d = null;
+    if (s.view === "detail" && s.selectedId) {
+      const m = this.effective(MANDATES.find(x => x.id === s.selectedId));
+      const meta = STATUS_META[m.status];
+      const revoked = m.status !== "유효";
+      d = {
+        id: m.id, agent: m.agent,
+        status: m.status, statusColor: meta.color, statusGlyph: meta.glyph,
+        certOpacity: revoked ? 0.55 : 1,
+        topBar: revoked ? "#999999" : "#16a34a",
+        certStatus: revoked ? "폐기됨" : "발급 완료",
+        certStatusColor: revoked ? "#999999" : "#16a34a",
+        signature: m.signature,
+        certRows: [
+          { label: "수임인", value: m.agent, font: "inherit", color: "#171717", weight: 400 },
+          { label: "1회 한도", value: won(m.maxPerTx), font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+          { label: "총 한도", value: won(m.maxTotal), font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+          { label: "카테고리", value: m.categories.join(" · "), font: "inherit", color: "#171717", weight: 400 },
+          { label: "시간대", value: m.hourFrom + " – " + m.hourTo, font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+          { label: "송금", value: m.allowTransfer ? "허용 · 등록 수취인 " + m.recipients.length + "명" : "불허", font: "inherit", color: m.allowTransfer ? "#ab6400" : "#60646c", weight: m.allowTransfer ? 600 : 400 },
+          { label: "유효기간", value: m.validFrom + " ~ " + m.validUntil, font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+        ],
+        totalStr: won(m.maxTotal), usedStr: won(m.usedAmount), remainStr: won(m.maxTotal - m.usedAmount),
+        hAllow: m.history.allow, hHold: m.history.hold, hBlock: m.history.block,
+        showRevokeCard: !revoked,
+        showRevokedNote: revoked,
+        revokedAt: m.revokedAt || "",
+        confirming: s.confirming,
+        notConfirming: !s.confirming,
+      };
+    }
+    return {
+      listView: s.view === "list",
+      detailView: s.view === "detail" && !!d,
+      tableWide, tableNarrow: !tableWide,
+      rows, d: d || {},
+      detailCols: s.width >= 1024 ? "55fr 45fr" : "1fr",
+      backToList: () => this.setState({ view: "list", confirming: false }),
+      startRevoke: () => this.setState({ confirming: true }),
+      cancelRevoke: () => this.setState({ confirming: false }),
+      confirmRevoke: () => this.setState(p => ({ confirming: false, revokedMap: Object.assign({}, p.revokedMap, { [p.selectedId]: "2026-08-07" }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

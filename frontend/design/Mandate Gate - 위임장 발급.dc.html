@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#ffffff; color:#171717; font-family:"Pretendard Variable", Pretendard, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0d74ce; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  @media (max-width:767px) { [data-nav-crumb] { display:none !important; } }
+  [data-nav-menu]::-webkit-scrollbar { display:none; }
+  *:focus:not(:focus-visible) { outline:none !important; }
+  button:disabled { cursor:default; opacity:0.5; }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { transition:none !important; } }
+</style>
+</helmet>
+<div data-screen-label="위임장 발급" style="min-height:100vh; background:#ffffff;">
+
+  <nav style="height:64px; border-bottom:1px solid #dcdee0; display:flex; align-items:center;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; display:flex; align-items:center; gap:24px;">
+      <a href="Mandate Gate - 랜딩.dc.html" style="flex:none; font-size:16px; font-weight:600; letter-spacing:-0.2px; color:#171717; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">Mandate Gate</a>
+      <span data-nav-crumb style="flex:none; font-size:14px; color:#60646c; white-space:nowrap;">위임장 / 발급</span>
+      <div data-nav-menu style="margin-left:auto; min-width:0; display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none; padding:4px 0;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터</a>
+        <a href="Mandate Gate - 요청 원장.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록</a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">승인 대기 <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#ab6400;">2</span></a>
+        <a href="Mandate Gate - 위임장 목록.dc.html" aria-current="page" style="flex:none; font-size:14px; font-weight:600; color:#171717; white-space:nowrap; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장</a>
+        <a href="Mandate Gate - 감사 기록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">감사 기록</a>
+        <span style="flex:none; font-size:13px; color:#999999; white-space:nowrap;">김민수 님</span>
+      </div>
+    </div>
+  </nav>
+
+  <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:48px 0;">
+    <h1 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">위임장 발급</h1>
+    <p style="margin:12px 0 0; max-width:560px; font-size:16px; line-height:1.5; color:#60646c; text-wrap:pretty;">에이전트가 할 수 있는 일의 범위를 미리 정합니다. 이후 모든 요청은 이 문서를 기준으로 검사됩니다.</p>
+
+    <sc-if value="{{ issued }}" hint-placeholder-val="{{ false }}">
+      <div style="margin-top:24px; display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; background:#fafafa; border-left:2px solid #16a34a; padding:14px 16px;">
+        <span style="font-size:14px; line-height:1.5; color:#171717;">위임장을 발급했습니다. 지금부터 쇼핑비서의 모든 요청이 이 범위로 검사됩니다.</span>
+        <a href="Mandate Gate - 요청 원장.dc.html" style="font-size:14px; font-weight:600; color:#171717; white-space:nowrap; border-radius:4px;" style-hover="text-decoration:underline; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록 보기 →</a>
+      </div>
+    </sc-if>
+
+    <div style="margin-top:40px; display:grid; grid-template-columns:{{ gridCols }}; gap:48px; align-items:start;">
+
+      <div style="order:{{ formOrder }}; min-width:0;">
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <label for="fld-agent" style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">수임인</label>
+          <select id="fld-agent" value="{{ agentValue }}" onChange="{{ onAgent }}" style="height:44px; padding:0 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:inherit; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+            <option value="쇼핑비서">쇼핑비서 — 외부 에이전트</option>
+            <option value="은행비서">은행비서 — 은행 에이전트</option>
+          </select>
+        </div>
+
+        <div style="margin-top:32px; border-top:1px solid #f0f0f3; padding-top:32px; display:flex; flex-direction:column; gap:24px;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="fld-pertx" style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">1회 한도</label>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <input id="fld-pertx" value="{{ perTxStr }}" onChange="{{ onPerTx }}" inputMode="numeric" style="flex:1; min-width:0; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; text-align:right; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+              <span style="flex:none; font-size:14px; color:#999999;">원</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="fld-total" style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">총 한도</label>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <input id="fld-total" value="{{ totalStr }}" onChange="{{ onTotal }}" inputMode="numeric" style="flex:1; min-width:0; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; text-align:right; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+              <span style="flex:none; font-size:14px; color:#999999;">원</span>
+            </div>
+            <sc-if value="{{ invalidTotal }}" hint-placeholder-val="{{ false }}">
+              <span style="font-size:13px; line-height:1.4; color:#b42318;">총 한도는 1회 한도보다 커야 합니다.</span>
+            </sc-if>
+          </div>
+        </div>
+
+        <div style="margin-top:32px; border-top:1px solid #f0f0f3; padding-top:32px; display:flex; flex-direction:column; gap:24px;">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">허용 카테고리</span>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+                <button onClick="{{ c.toggle }}" aria-pressed="{{ c.pressed }}" style="height:36px; padding:0 16px; border:1px solid {{ c.border }}; border-radius:8px; background:#ffffff; font-family:inherit; font-size:14px; font-weight:{{ c.weight }}; color:{{ c.color }}; cursor:pointer;" style-focus="outline:2px solid #171717; outline-offset:2px;">{{ c.name }}</button>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">허용 시간대</span>
+            <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+              <input value="{{ hourFrom }}" onChange="{{ onHourFrom }}" aria-label="시작 시각" style="flex:1 1 120px; min-width:100px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+              <span style="flex:none; font-size:14px; color:#999999;">~</span>
+              <input value="{{ hourTo }}" onChange="{{ onHourTo }}" aria-label="종료 시각" style="flex:1 1 120px; min-width:100px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:32px; border-top:1px solid #f0f0f3; padding-top:32px;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <span id="lbl-transfer" style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">송금 허용</span>
+            <button role="switch" aria-checked="{{ transferChecked }}" aria-labelledby="lbl-transfer" onClick="{{ toggleTransfer }}" style="display:inline-flex; width:36px; height:20px; flex:none; border:none; border-radius:9999px; background:{{ trackBg }}; padding:2px; cursor:pointer; transition:background 0.2s ease;" style-focus="outline:2px solid #171717; outline-offset:2px;">
+              <span style="width:16px; height:16px; border-radius:9999px; background:#ffffff; box-shadow:0 1px 2px rgba(0,0,0,0.2); transform:{{ knobX }}; transition:transform 0.2s ease;"></span>
+            </button>
+          </div>
+          <p style="margin:8px 0 0; font-size:13px; line-height:1.4; color:#999999;">켜면 이 에이전트가 등록된 수취인에게 이체할 수 있습니다. 기본값은 꺼짐입니다.</p>
+          <div data-reveal style="display:grid; grid-template-rows:{{ revealRows }}; opacity:{{ revealOpacity }}; transition:grid-template-rows 0.2s ease, opacity 0.2s ease;">
+            <div style="overflow:hidden; min-height:0;">
+              <div style="margin-top:16px; background:#fafafa; border-left:2px solid #ab6400; padding:16px;">
+                <p style="margin:0; font-size:14px; line-height:1.5; color:#171717; text-wrap:pretty;">수취인은 미리 등록된 계좌만 허용됩니다. 웹페이지에서 읽은 계좌로는 어떤 경우에도 송금되지 않습니다.</p>
+                <div style="margin-top:16px; display:flex; gap:8px; flex-wrap:wrap;">
+                  <input value="{{ recipName }}" onChange="{{ onRecipName }}" placeholder="이름" aria-label="수취인 이름" style="flex:1 1 100px; min-width:90px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:inherit; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+                  <input value="{{ recipAcct }}" onChange="{{ onRecipAcct }}" placeholder="계좌번호" aria-label="수취인 계좌번호" style="flex:2 1 160px; min-width:140px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+                  <button onClick="{{ addRecipient }}" style="flex:none; height:44px; padding:0 16px; background:#ffffff; border:1px solid #dcdee0; border-radius:8px; font-family:inherit; font-size:14px; font-weight:600; color:#171717; cursor:pointer;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04);" style-focus="outline:2px solid #171717; outline-offset:2px;">수취인 추가</button>
+                </div>
+                <sc-for list="{{ recipients }}" as="rc" hint-placeholder-count="0">
+                  <div style="display:flex; align-items:baseline; gap:12px; padding:12px 0; border-bottom:1px solid #f0f0f3;">
+                    <span style="font-size:14px; color:#171717;">{{ rc.name }}</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:13px; color:#60646c;">{{ rc.acct }}</span>
+                    <button onClick="{{ rc.remove }}" style="margin-left:auto; background:none; border:none; padding:0; font-family:inherit; font-size:13px; color:#60646c; cursor:pointer; text-decoration:underline; border-radius:4px;" style-hover="color:#171717;" style-focus="outline:2px solid #171717; outline-offset:2px;">삭제</button>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:32px; border-top:1px solid #f0f0f3; padding-top:32px; display:flex; flex-direction:column; gap:8px;">
+          <span style="font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">유효기간</span>
+          <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+            <input value="{{ validFrom }}" onChange="{{ onValidFrom }}" aria-label="유효기간 시작" style="flex:1 1 130px; min-width:120px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+            <span style="flex:none; font-size:14px; color:#999999;">~</span>
+            <input value="{{ validUntil }}" onChange="{{ onValidUntil }}" aria-label="유효기간 종료" style="flex:1 1 130px; min-width:120px; height:44px; box-sizing:border-box; padding:12px 16px; border:1px solid #dcdee0; border-radius:8px; background:#ffffff; font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:14px; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:-1px;">
+          </div>
+        </div>
+      </div>
+
+      <div style="order:{{ certOrder }}; min-width:0; position:{{ certPos }}; top:88px;">
+        <div style="border:1px solid #dcdee0; border-radius:12px; overflow:hidden;">
+          <div style="height:2px; background:{{ topBar }}; transition:background 0.3s ease;"></div>
+          <div style="padding:32px;">
+            <div style="font-size:18px; font-weight:600; letter-spacing:0.2em; color:#171717;">위임장</div>
+            <div style="margin-top:4px; font-family:'JetBrains Mono',monospace; font-size:13px; color:#999999;">#M-2026-0041</div>
+            <div style="margin-top:20px; border-top:1px solid #dcdee0;">
+              <sc-for list="{{ certRows }}" as="row" hint-placeholder-count="7">
+                <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 4px; margin:0 -4px; border-bottom:1px solid #f0f0f3; background:{{ row.bg }}; transition:background 0.3s ease;">
+                  <span style="flex:none; font-size:13px; color:#999999;">{{ row.label }}</span>
+                  <span style="text-align:right; font-size:14px; line-height:1.5; font-weight:{{ row.weight }}; color:{{ row.color }}; font-family:{{ row.font }}; font-variant-numeric:tabular-nums;">{{ row.value }}</span>
+                </div>
+              </sc-for>
+              <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px; padding:13px 4px; margin:0 -4px;">
+                <span style="flex:none; font-size:13px; color:#999999;">상태</span>
+                <span style="font-size:14px; font-weight:{{ statusWeight }}; color:{{ statusColor }};">{{ statusText }}</span>
+              </div>
+              <sc-if value="{{ issued }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 4px 4px; margin:0 -4px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:13px; color:#999999;">서명 sig_8f3a9c21e4b7</div>
+              </sc-if>
+            </div>
+          </div>
+        </div>
+        <button onClick="{{ issue }}" disabled="{{ ctaDisabled }}" style="margin-top:16px; width:100%; height:44px; background:#000000; border:1px solid #000000; border-radius:8px; font-family:inherit; font-size:14px; font-weight:600; color:#ffffff; cursor:pointer;" style-hover="box-shadow:0 4px 12px rgba(0,0,0,.04);" style-focus="outline:2px solid #171717; outline-offset:2px;">{{ ctaLabel }}</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;flashHighlight&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;동작&quot; }
+}">
+const CATEGORIES = ["식음료", "교통", "생활용품", "구독", "기타"];
+const DEFAULT_FORM = {
+  agent: "쇼핑비서", maxPerTx: 30000, maxTotal: 200000,
+  categories: ["식음료", "교통"], hourFrom: "07:00", hourTo: "22:00",
+  allowTransfer: false, recipients: [], validFrom: "2026-08-07", validUntil: "2026-09-06",
+};
+
+class Component extends DCLogic {
+  state = Object.assign({}, DEFAULT_FORM, { issued: false, recipName: "", recipAcct: "", flashRow: null, width: 1280 });
+  componentDidMount() {
+    this._reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    this._onR = () => { if (window.innerWidth !== this.state.width) this.setState({ width: window.innerWidth }); };
+    window.addEventListener("resize", this._onR);
+    this._onR();
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onR); clearTimeout(this._ft); }
+  set(patch, rowKey) {
+    this.setState(patch);
+    if (rowKey && !this._reduced && (this.props.flashHighlight ?? true)) {
+      clearTimeout(this._ft);
+      this.setState({ flashRow: rowKey });
+      this._ft = setTimeout(() => this.setState({ flashRow: null }), 180);
+    }
+  }
+  num(e) { const d = (e.target.value || "").replace(/[^0-9]/g, ""); return d ? parseInt(d, 10) : 0; }
+  renderVals() {
+    const s = this.state;
+    const wide = s.width >= 1024;
+    const won = n => n.toLocaleString("ko-KR") + "원";
+    const flash = k => s.flashRow === k ? "#f0f0f3" : "transparent";
+    const transferValue = s.allowTransfer ? "허용 · 등록 수취인 " + s.recipients.length + "명" : "불허";
+    const certRows = [
+      { k: "agent", label: "수임인", value: s.agent, font: "inherit", color: "#171717", weight: 400 },
+      { k: "perTx", label: "1회 한도", value: won(s.maxPerTx), font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+      { k: "total", label: "총 한도", value: won(s.maxTotal), font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+      { k: "cats", label: "카테고리", value: s.categories.length ? s.categories.join(" · ") : "없음", font: "inherit", color: "#171717", weight: 400 },
+      { k: "hours", label: "시간대", value: s.hourFrom + " – " + s.hourTo, font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+      { k: "transfer", label: "송금", value: transferValue, font: "inherit", color: s.allowTransfer ? "#ab6400" : "#60646c", weight: s.allowTransfer ? 600 : 400 },
+      { k: "valid", label: "유효기간", value: s.validFrom + " ~ " + s.validUntil, font: "'JetBrains Mono',monospace", color: "#171717", weight: 400 },
+    ].map(r => Object.assign(r, { bg: flash(r.k) }));
+    const invalidTotal = s.maxTotal < s.maxPerTx;
+    return {
+      gridCols: wide ? "48fr 52fr" : "1fr",
+      formOrder: wide ? 1 : 2,
+      certOrder: wide ? 2 : 1,
+      certPos: wide ? "sticky" : "static",
+      agentValue: s.agent,
+      onAgent: e => this.set({ agent: e.target.value }, "agent"),
+      perTxStr: s.maxPerTx.toLocaleString("ko-KR"),
+      onPerTx: e => this.set({ maxPerTx: this.num(e) }, "perTx"),
+      totalStr: s.maxTotal.toLocaleString("ko-KR"),
+      onTotal: e => this.set({ maxTotal: this.num(e) }, "total"),
+      invalidTotal,
+      chips: CATEGORIES.map(name => {
+        const on = s.categories.indexOf(name) >= 0;
+        return {
+          name, pressed: on ? "true" : "false",
+          border: on ? "#171717" : "#dcdee0",
+          color: on ? "#171717" : "#60646c",
+          weight: on ? 600 : 400,
+          toggle: () => this.set({ categories: on ? s.categories.filter(c => c !== name) : s.categories.concat(name) }, "cats"),
+        };
+      }),
+      hourFrom: s.hourFrom, hourTo: s.hourTo,
+      onHourFrom: e => this.set({ hourFrom: e.target.value }, "hours"),
+      onHourTo: e => this.set({ hourTo: e.target.value }, "hours"),
+      validFrom: s.validFrom, validUntil: s.validUntil,
+      onValidFrom: e => this.set({ validFrom: e.target.value }, "valid"),
+      onValidUntil: e => this.set({ validUntil: e.target.value }, "valid"),
+      transferChecked: s.allowTransfer ? "true" : "false",
+      trackBg: s.allowTransfer ? "#171717" : "#dcdee0",
+      knobX: s.allowTransfer ? "translateX(16px)" : "translateX(0)",
+      toggleTransfer: () => this.set({ allowTransfer: !s.allowTransfer }, "transfer"),
+      revealRows: s.allowTransfer ? "1fr" : "0fr",
+      revealOpacity: s.allowTransfer ? 1 : 0,
+      recipName: s.recipName, recipAcct: s.recipAcct,
+      onRecipName: e => this.setState({ recipName: e.target.value }),
+      onRecipAcct: e => this.setState({ recipAcct: e.target.value }),
+      addRecipient: () => {
+        if (!s.recipName.trim() || !s.recipAcct.trim()) return;
+        this.set({ recipients: s.recipients.concat({ name: s.recipName.trim(), acct: s.recipAcct.trim() }), recipName: "", recipAcct: "" }, "transfer");
+      },
+      recipients: s.recipients.map((rc, i) => ({
+        name: rc.name, acct: rc.acct,
+        remove: () => this.set({ recipients: s.recipients.filter((x, j) => j !== i) }, "transfer"),
+      })),
+      certRows,
+      issued: s.issued,
+      statusText: s.issued ? "발급 완료" : "미발급",
+      statusColor: s.issued ? "#16a34a" : "#999999",
+      statusWeight: s.issued ? 600 : 400,
+      topBar: s.issued ? "#16a34a" : "transparent",
+      ctaLabel: s.issued ? "발급 완료" : "위임장 발급",
+      ctaDisabled: s.issued || invalidTotal,
+      issue: () => this.setState({ issued: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --canvas: #ffffff;
+  --canvas-soft: #fafafa;
+  --surface-dark: #171717;
+  --surface-dark-elevated: #1a1a1a;
+  --surface-strong: #f0f0f3;
+
+  --ink: #171717;
+  --body: #60646c;
+  --muted: #999999;
+  --on-dark: #ffffff;
+  --on-dark-soft: #b0b4ba;
+
+  --hairline: #f0f0f3;
+  --hairline-strong: #dcdee0;
+
+  --primary: #000000;
+  --text-link: #0d74ce;
+
+  --verdict-block: #b42318;
+  --verdict-hold: #ab6400;
+  --verdict-pass: #16a34a;
+}
+
+@layer base {
+  body {
+    margin: 0;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Default for plain in-copy links only — components must set their own
+     color explicitly (nav links, logo, buttons never use --text-link). */
+  a {
+    color: var(--text-link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+@keyframes traceIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-anim] {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+[data-anim="off"] {
+  animation: none !important;
+  opacity: 1 !important;
+}

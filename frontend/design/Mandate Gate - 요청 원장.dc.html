@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#ffffff; color:#171717; font-family:"Pretendard Variable", Pretendard, sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#0d74ce; text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  @media (max-width:767px) { [data-nav-crumb] { display:none !important; } }
+  [data-nav-menu]::-webkit-scrollbar { display:none; }
+  *:focus:not(:focus-visible) { outline:none !important; }
+  [data-row] [data-detail] { opacity:0; }
+  [data-row]:hover [data-detail], [data-row]:focus [data-detail] { opacity:1; }
+</style>
+</helmet>
+<div data-screen-label="요청 원장" style="min-height:100vh; background:#ffffff;">
+
+  <nav style="height:64px; border-bottom:1px solid #dcdee0; display:flex; align-items:center;">
+    <div style="width:min(1120px, 100% - 48px); margin:0 auto; display:flex; align-items:center; gap:24px;">
+      <a href="Mandate Gate - 랜딩.dc.html" style="flex:none; font-size:16px; font-weight:600; letter-spacing:-0.2px; color:#171717; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">Mandate Gate</a>
+      <span data-nav-crumb style="flex:none; font-size:14px; color:#60646c; white-space:nowrap;">요청 기록</span>
+      <div data-nav-menu style="margin-left:auto; min-width:0; display:flex; align-items:center; gap:20px; overflow-x:auto; scrollbar-width:none; padding:4px 0;">
+        <a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터</a>
+        <a href="Mandate Gate - 요청 원장.dc.html" aria-current="page" style="flex:none; font-size:14px; font-weight:600; color:#171717; white-space:nowrap; border-radius:4px;" style-hover="text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">요청 기록</a>
+        <a href="Mandate Gate - 승인 대기.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">승인 대기 <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#ab6400;">2</span></a>
+        <a href="Mandate Gate - 위임장 목록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">위임장</a>
+        <a href="Mandate Gate - 감사 기록.dc.html" style="flex:none; font-size:14px; color:#60646c; white-space:nowrap; border-radius:4px;" style-hover="color:#171717; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:2px;">감사 기록</a>
+        <span style="flex:none; font-size:13px; color:#999999; white-space:nowrap;">김민수 님</span>
+      </div>
+    </div>
+  </nav>
+
+  <div style="width:min(1120px, 100% - 48px); margin:0 auto; padding:48px 0;">
+    <h1 style="margin:0; font-size:36px; font-weight:600; line-height:1.15; letter-spacing:-0.9px; color:#171717;">요청 기록</h1>
+    <p style="margin:12px 0 0; font-size:16px; line-height:1.5; color:#60646c;">게이트웨이가 판정한 모든 요청입니다.</p>
+    <div style="margin-top:16px; font-size:13px; line-height:1.4; color:#999999;"><span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">2026-08-07</span> · 오늘 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">33</span>건 판정 · 마지막 요청 <span style="font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;">14:33:12</span></div>
+
+    <div style="margin-top:32px; border-bottom:1px solid #f0f0f3; overflow-x:auto; overflow-y:hidden;">
+      <div style="display:flex; gap:28px; white-space:nowrap;">
+        <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="4">
+          <button onClick="{{ tab.select }}" style="background:none; border:none; padding:0 2px 12px; margin-bottom:-1px; cursor:pointer; font-family:inherit; font-size:14px; font-weight:{{ tab.weight }}; color:{{ tab.color }}; border-bottom:2px solid {{ tab.underline }};" style-focus="outline:2px solid #171717; outline-offset:2px;">{{ tab.name }} <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums;">{{ tab.count }}</span></button>
+        </sc-for>
+      </div>
+    </div>
+
+    <sc-if value="{{ hasRows }}" hint-placeholder-val="{{ true }}">
+      <div>
+        <sc-if value="{{ table }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid; grid-template-columns:{{ gridCols }}; gap:16px; align-items:center; padding:12px 0 12px 18px; border-bottom:1px solid #dcdee0; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#999999;">
+            <span>시각</span><span>에이전트</span><span style="text-align:right;">금액</span>
+            <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}"><span>가맹점 / 수취인</span></sc-if>
+            <span>판정</span><span></span>
+          </div>
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+            <a data-row href="{{ r.href }}" style="display:grid; grid-template-columns:{{ gridCols }}; gap:16px; align-items:center; min-height:63px; padding:10px 0 10px 16px; border-left:2px solid {{ r.bar }}; border-bottom:1px solid #f0f0f3; text-decoration:none; pointer-events:{{ r.pe }}; cursor:{{ r.cursor }}; color:inherit;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#60646c;">{{ r.at }}</span>
+              <span style="font-size:14px; color:#171717;">{{ r.agent }}</span>
+              <span style="text-align:right;"><span style="font-family:'JetBrains Mono',monospace; font-size:14px; font-variant-numeric:tabular-nums; color:#171717;">{{ r.amountStr }}</span>
+                <sc-if value="{{ r.foldTarget }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:block; margin-top:2px; font-size:13px; line-height:1.4; color:#60646c; font-family:{{ r.targetFont }};">{{ r.target }}</span>
+                  <sc-if value="{{ r.hasReason }}" hint-placeholder-val="{{ false }}"><span style="display:block; margin-top:2px; font-size:13px; line-height:1.4; color:#999999;">{{ r.reason }}</span></sc-if>
+                </sc-if>
+              </span>
+              <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+                <span style="min-width:0;">
+                  <span style="font-size:14px; line-height:1.5; color:#60646c; font-family:{{ r.targetFont }};">{{ r.target }}</span>
+                  <sc-if value="{{ r.isNew }}" hint-placeholder-val="{{ false }}"><span style="margin-left:8px; padding:2px 8px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c; vertical-align:1px;">신규</span></sc-if>
+                  <sc-if value="{{ r.hasReason }}" hint-placeholder-val="{{ false }}"><span style="display:block; margin-top:2px; font-size:13px; line-height:1.4; color:#999999;">{{ r.reason }}</span></sc-if>
+                </span>
+              </sc-if>
+              <span style="font-size:14px; font-weight:600; color:{{ r.verdictColor }}; white-space:nowrap;"><span style="font-size:13px;">{{ r.glyph }}</span> {{ r.verdict }}</span>
+              <span style="text-align:right;">
+                <sc-if value="{{ r.isBlock }}" hint-placeholder-val="{{ false }}"><span data-detail style="font-size:13px; font-weight:600; color:#171717; white-space:nowrap;">상세 →</span></sc-if>
+              </span>
+            </a>
+          </sc-for>
+        </sc-if>
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+            <a data-row href="{{ r.href }}" style="display:block; padding:14px 0 14px 14px; border-left:2px solid {{ r.bar }}; border-bottom:1px solid #f0f0f3; text-decoration:none; pointer-events:{{ r.pe }}; cursor:{{ r.cursor }}; color:inherit;" style-hover="background:#fafafa; text-decoration:none;" style-focus="outline:2px solid #171717; outline-offset:-2px;">
+              <span style="display:flex; align-items:baseline; gap:12px;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:13px; font-variant-numeric:tabular-nums; color:#60646c;">{{ r.at }}</span>
+                <span style="font-size:14px; color:#171717;">{{ r.agent }}</span>
+                <span style="margin-left:auto; font-size:14px; font-weight:600; color:{{ r.verdictColor }}; white-space:nowrap;"><span style="font-size:13px;">{{ r.glyph }}</span> {{ r.verdict }}</span>
+              </span>
+              <span style="display:flex; align-items:baseline; gap:12px; margin-top:6px; flex-wrap:wrap;">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:14px; font-variant-numeric:tabular-nums; color:#171717;">{{ r.amountStr }}</span>
+                <span style="font-size:14px; color:#60646c; font-family:{{ r.targetFont }};">{{ r.target }}</span>
+                <sc-if value="{{ r.isNew }}" hint-placeholder-val="{{ false }}"><span style="padding:2px 8px; border-radius:9999px; background:#f0f0f3; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#60646c;">신규</span></sc-if>
+              </span>
+              <sc-if value="{{ r.hasReason }}" hint-placeholder-val="{{ false }}"><span style="display:block; margin-top:4px; font-size:13px; line-height:1.4; color:#999999;">{{ r.reason }}</span></sc-if>
+            </a>
+          </sc-for>
+        </sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ emptyState }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:96px 24px; text-align:center; border-bottom:1px solid #f0f0f3;">
+        <div style="font-size:16px; line-height:1.5; color:#999999;">해당하는 요청이 없습니다.</div>
+        <div style="margin-top:12px;"><a href="Mandate Gate - 공격 시뮬레이터.dc.html" style="font-size:14px; font-weight:600; color:#171717; border-radius:4px;" style-hover="text-decoration:underline; color:#171717;" style-focus="outline:2px solid #171717; outline-offset:2px;">시뮬레이터에서 요청 보내기 →</a></div>
+      </div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;defaultFilter&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;전체&quot;, &quot;통과&quot;, &quot;승인 필요&quot;, &quot;차단&quot;], &quot;default&quot;: &quot;전체&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;동작&quot; }
+}">
+const COUNTS = { all: 33, allow: 27, hold: 1, block: 5 };
+const REQUESTS = [
+  { id: "req_4827", at: "14:33:12", agent: "은행비서", amount: 1200000, target: "1002-XXX-4471", isAccount: true, verdict: "차단", reason: "송금 권한 없음" },
+  { id: "req_4825", at: "14:19:47", agent: "쇼핑비서", amount: 8900, target: "카페", verdict: "통과" },
+  { id: "req_4823", at: "14:11:02", agent: "은행비서", amount: 50000, target: "박OO", verdict: "승인 필요", reason: "신규 수취인" },
+  { id: "req_4821", at: "14:07:55", agent: "쇼핑비서", amount: 490000, target: "미확인 가맹점", isNew: true, verdict: "차단", reason: "한도 초과 · 출처 L3" },
+  { id: "req_4819", at: "14:04:10", agent: "쇼핑비서", amount: 3200, target: "편의점", verdict: "통과" },
+  { id: "req_4818", at: "14:02:31", agent: "쇼핑비서", amount: 12800, target: "김밥천국", verdict: "통과" },
+  { id: "req_4815", at: "13:51:08", agent: "쇼핑비서", amount: 15400, target: "마트", verdict: "통과" },
+  { id: "req_4812", at: "13:40:22", agent: "은행비서", amount: 30000, target: "이OO", verdict: "통과" },
+];
+const VERDICT_META = {
+  "통과": { color: "#16a34a", glyph: "✓", bar: "transparent" },
+  "승인 필요": { color: "#ab6400", glyph: "!", bar: "#ab6400" },
+  "차단": { color: "#b42318", glyph: "✕", bar: "#b42318" },
+};
+const TAB_DEFS = [
+  { key: "all", name: "전체", count: COUNTS.all },
+  { key: "통과", name: "통과", count: COUNTS.allow },
+  { key: "승인 필요", name: "승인 필요", count: COUNTS.hold },
+  { key: "차단", name: "차단", count: COUNTS.block },
+];
+
+class Component extends DCLogic {
+  state = { filter: "all", width: 1280 };
+  componentDidMount() {
+    if (this.props.defaultFilter && this.props.defaultFilter !== "전체") this.setState({ filter: this.props.defaultFilter });
+    this._onR = () => { if (window.innerWidth !== this.state.width) this.setState({ width: window.innerWidth }); };
+    window.addEventListener("resize", this._onR);
+    this._onR();
+  }
+  componentWillUnmount() { window.removeEventListener("resize", this._onR); }
+  renderVals() {
+    const { filter, width } = this.state;
+    const wide = width >= 1024;
+    const table = width >= 768;
+    const list = filter === "all" ? REQUESTS : REQUESTS.filter(r => r.verdict === filter);
+    const rows = list.map(r => {
+      const m = VERDICT_META[r.verdict];
+      return {
+        href: r.verdict === "승인 필요" ? "Mandate Gate - 승인 대기.dc.html" : r.verdict === "차단" ? "Mandate Gate - req_4821.dc.html" : "",
+        pe: r.verdict === "통과" ? "none" : "auto",
+        cursor: r.verdict === "통과" ? "default" : "pointer",
+        at: r.at, agent: r.agent,
+        amountStr: r.amount.toLocaleString("ko-KR") + "원",
+        target: r.target,
+        targetFont: r.isAccount ? "'JetBrains Mono',monospace" : "inherit",
+        isNew: !!r.isNew,
+        verdict: r.verdict, verdictColor: m.color, glyph: m.glyph, bar: m.bar,
+        reason: r.reason || "", hasReason: !!r.reason,
+        isBlock: r.verdict === "차단",
+        foldTarget: table && !wide,
+      };
+    });
+    const tabs = TAB_DEFS.map(t => ({
+      name: t.name, count: t.count,
+      weight: filter === t.key ? 600 : 400,
+      color: filter === t.key ? "#171717" : "#999999",
+      underline: filter === t.key ? "#171717" : "transparent",
+      select: () => this.setState({ filter: t.key }),
+    }));
+    return {
+      tabs, rows,
+      hasRows: rows.length > 0,
+      emptyState: rows.length === 0,
+      table, narrow: !table, wide,
+      gridCols: wide ? "88px 110px 130px minmax(0,1fr) 110px 56px" : "88px 110px minmax(0,1fr) 110px 56px",
+    };
+  }
+}
+</script>
+</body>
+</html>
